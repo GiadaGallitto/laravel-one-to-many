@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,8 @@ class ProjectController extends Controller
             'author' => 'required',
             'argument' => 'required|min:5|max:100',
             'start_date' => 'required',
-            'image' => 'required'
+            'image' => 'required',
+            'type_id' => 'required|exists:types,id',
         ];
 
         $this->messages = [
@@ -49,6 +51,8 @@ class ProjectController extends Controller
             'start_date.required' => 'E\' necessaria una data',
 
             'image.required' =>'Inserire un immagine',
+
+            'type_id.required' => 'E\' necessaria una tipologia',
         ];
     }
 
@@ -65,10 +69,10 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Project $project)
+    public function create()
     {
         // $project = new Project();
-        return view('admin.projects.create', compact('project'));
+        return view('admin.projects.create', ['project'=>new Project(), 'types'=> Type::all()]);
     }
 
     /**
@@ -121,7 +125,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit', ['project'=> $project, 'types'=> Type::all()]);
     }
 
     /**

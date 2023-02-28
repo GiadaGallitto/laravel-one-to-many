@@ -41,6 +41,20 @@
     </div>
 
     <div class="mb-3">
+        <label for="type_id" class="form-label">Type</label>
+        <select class="form-control @error('type_id') is-invalid @enderror" id="type_id" name="type_id">
+            @foreach ($types as $type)                
+            <option value="{{ $type->id }}">{{$type->name}}</option>
+            @endforeach
+        </select>
+        @error ('type_id')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+        @enderror
+    </div>
+
+    <div class="mb-3">
         <label for="start_date">Start Date</label>
         <input type="date" name="start_date" id="start_date" class="form-control @error('start_date') is-invalid @enderror" value="{{ old('start_date', $project->start_date )}}">
         @error ('start_date')

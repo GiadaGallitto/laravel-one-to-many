@@ -11,10 +11,10 @@ class Project extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'slug', 'argument', 'description', 'author', 'start_date', 'concluded', 'image'];
+    protected $fillable = ['title', 'slug', 'argument', 'description', 'author', 'start_date', 'concluded', 'image', 'type_id'];
     
     public function type(){
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Type::class); 
     }
     /**
      * Get the route key for the model.
