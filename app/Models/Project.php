@@ -13,6 +13,9 @@ class Project extends Model
 
     protected $fillable = ['title', 'slug', 'argument', 'description', 'author', 'start_date', 'concluded', 'image'];
     
+    public function type(){
+        return $this->belongsTo(Type::class);
+    }
     /**
      * Get the route key for the model.
      *
