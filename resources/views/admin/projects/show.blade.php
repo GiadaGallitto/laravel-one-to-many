@@ -4,15 +4,22 @@
     <div class="project">
         <div class="container">
             <div class="card mt-4 p-4 text-center">
-                <div class="buttons d-flex justify-content-end mb-2">
-                    <a href="{{ route('admin.projects.edit', $project->slug) }}" class="me-2 btn btn-warning d-inline-block">
-                        <i class="fa-solid fa-pencil"></i>
-                    </a>
-                    <form class="d-inline-block form-delete" action="{{route('admin.projects.destroy', $project->slug)}}" method="POST" data-element-name="{{$project->title}}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                    </form>
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="type">
+                        <p>
+                            <strong>Type: </strong>{{$project->type->name}}
+                        </p>
+                    </div>
+                    <div class="buttons">
+                        <a href="{{ route('admin.projects.edit', $project->slug) }}" class="me-2 btn btn-warning d-inline-block">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                        <form class="d-inline-block form-delete" action="{{route('admin.projects.destroy', $project->slug)}}" method="POST" data-element-name="{{$project->title}}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
                 </div>
                 <div>
                     <h4>
