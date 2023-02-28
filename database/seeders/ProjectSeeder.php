@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -17,9 +18,9 @@ class ProjectSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        //
         for($i=0; $i < 60 ; $i++){
             $new_project = new Project();
+            $new_project->type_id = Type::inRandomOrder()->first()->id;
             $new_project->title = $faker->text($maxNbChars = 15);
             $new_project->slug = Str::slug($new_project->title);
             $new_project->argument = $faker->text($maxNbChars = 50);
